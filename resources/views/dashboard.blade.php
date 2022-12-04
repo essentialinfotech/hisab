@@ -1,6 +1,3 @@
-@php
-    $setting = App\Models\Setting::first();
-@endphp
 @section('title', 'Dashboard - ' . @$setting->title)
 <x-app-layout>
     <!-- Page Content -->
@@ -24,11 +21,7 @@
                     </div>
                 </div>
             </section>
-            @php
-                $totalCustomer = App\Models\Customer::where('status', 1)->count();
-                $totalWarhouse = App\Models\Warhouse::count();
-                $totalUser = App\Models\User::count();
-            @endphp
+
 
 
             <section class="content">
@@ -50,9 +43,9 @@
                                             <div class="row">
 
                                                 <div class="col-lg-3 col-6">
-                                                    <div class="small-box bg-success">
+                                                    <div class="small-box bg-warning">
                                                         <div class="inner">
-                                                            <h3>{{ $totalCustomer < 9 ? '0' . $totalCustomer : $totalCustomer }}
+                                                            <h3>Tk.{{ $totalCost < 9 ? '0' . $totalCost : $totalCost }}
                                                             </h3>
                                                             <p>Total Cost</p>
                                                         </div>
@@ -66,7 +59,7 @@
                                                 <div class="col-lg-3 col-6">
                                                     <div class="small-box bg-info">
                                                         <div class="inner">
-                                                            <h3>{{ $totalWarhouse < 9 ? '0' . $totalWarhouse : $totalWarhouse }}
+                                                            <h3>Tk.{{ $totalRevenue < 9 ? '0' . $totalRevenue : $totalRevenue }}
                                                             </h3>
                                                             <p>Total Revenue</p>
                                                         </div>
@@ -79,7 +72,8 @@
                                                 <div class="col-lg-3 col-6">
                                                     <div class="small-box bg-danger">
                                                         <div class="inner">
-                                                            <h3>50</h3>
+                                                            <h3>Tk.{{ $todayCost < 9 ? '0' . $todayCost : $todayCost }}
+                                                            </h3>
                                                             <p>Today Cost</p>
                                                         </div>
                                                         <div class="icon">
@@ -92,8 +86,21 @@
                                                 <div class="col-lg-3 col-6">
                                                     <div class="small-box bg-success">
                                                         <div class="inner">
-                                                            <h3>100</h3>
+                                                            <h3>Tk.{{ $todayRevenue < 9 ? '0' . $todayRevenue : $todayRevenue }}
+                                                            </h3>
                                                             <p>Today Revenue</p>
+                                                        </div>
+                                                        <div class="icon">
+                                                            <i class="ion ion-stats-bars"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3 col-6">
+                                                    <div class="small-box bg-success">
+                                                        <div class="inner">
+                                                            <h3>Tk.{{ $totalRevenue - $totalCost < 9 ? '0' . $totalRevenue - $totalCost : $totalRevenue - $totalCost }}
+                                                            </h3>
+                                                            <p>Cash</p>
                                                         </div>
                                                         <div class="icon">
                                                             <i class="ion ion-stats-bars"></i>

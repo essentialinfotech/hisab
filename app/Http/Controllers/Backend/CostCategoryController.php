@@ -16,7 +16,7 @@ class CostCategoryController extends Controller
      */
     public function index()
     {
-        $data['cost_categories'] = CostCategory::get();
+        $data['cost_categories'] = CostCategory::where('user_id', Auth::user()->id)->get();
         return view('pages.cost-category.index', $data);
     }
 
@@ -39,7 +39,7 @@ class CostCategoryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
+            'name' => 'required|unique:cost_categories,name',
         ]);
 
         $data = new CostCategory();
@@ -82,10 +82,10 @@ class CostCategoryController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => 'required',
+            'name' => 'required|unique:cost_categories,name,'.$id,
         ]);
 
-        $data = CostCategory::findOrFail($id);
+        $data = CostCategory::where('user_id', Auth::user()->id)->findOrFail($id);
         $data->name = $request->name;
         $data->description = $request->description;
         $data->update();
@@ -101,7 +101,7 @@ class CostCategoryController extends Controller
 
     public function destroy($id)
     {
-        $warhouse = CostCategory::findOrFail($id);
+        $warhouse = CostCategory::where('user_id', Auth::user()->id)->findOrFail($id);
         $warhouse->delete();
         return redirect()->back()->with('success', 'Data Deleted Successfully');
     }

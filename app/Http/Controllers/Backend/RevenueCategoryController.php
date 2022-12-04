@@ -16,7 +16,7 @@ class RevenueCategoryController extends Controller
      */
     public function index()
     {
-        $data['revenue_categories'] = RevenueCategory::get();
+        $data['revenue_categories'] = RevenueCategory::where('user_id', Auth::user()->id)->get();
         return view('pages.revenue-category.index', $data);
     }
 
@@ -39,7 +39,7 @@ class RevenueCategoryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
+            'name' => 'required|unique:revenue_categories,name',
         ]);
 
         $data = new RevenueCategory();
@@ -82,10 +82,10 @@ class RevenueCategoryController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => 'required',
+            'name' => 'required|unique:revenue_categories,name,' . $id,
         ]);
 
-        $data = RevenueCategory::findOrFail($id);
+        $data = RevenueCategory::where('user_id', Auth::user()->id)->findOrFail($id);
         $data->name = $request->name;
         $data->description = $request->description;
         $data->update();
@@ -101,7 +101,7 @@ class RevenueCategoryController extends Controller
 
     public function destroy($id)
     {
-        $data = RevenueCategory::findOrFail($id);
+        $data = RevenueCategory::where('user_id', Auth::user()->id)->findOrFail($id);
         $data->delete();
         return redirect()->back()->with('success', 'Data Deleted Successfully');
     }

@@ -17,8 +17,8 @@ class CostController extends Controller
      */
     public function index()
     {
-        $data['all_cost'] = Cost::get();
-        $data['cost_categories'] = CostCategory::get();
+        $data['all_cost'] = Cost::where('user_id', Auth::user()->id)->get();
+        $data['cost_categories'] = CostCategory::where('user_id', Auth::user()->id)->get();
         return view('pages.cost.index', $data);
     }
 
@@ -48,7 +48,7 @@ class CostController extends Controller
         $data = new Cost();
         $data->cost_category_id = $request->cost_category_id;
         $data->amount = $request->amount;
-        $data->date = $request->date;
+        $data->date = date("Y-d-m", strtotime($request->date));
         $data->note = $request->note;
         $data->user_id = Auth::user()->id;
         $data->save();
@@ -91,10 +91,10 @@ class CostController extends Controller
             'amount' => 'required',
         ]);
 
-        $data = Cost::findOrFail($id);
+        $data = Cost::where('user_id', Auth::user()->id)->findOrFail($id);
         $data->cost_category_id = $request->cost_category_id;
         $data->amount = $request->amount;
-        $data->date = $request->date;
+        $data->date = date("Y-d-m", strtotime($request->date));
         $data->note = $request->note;
         $data->user_id = Auth::user()->id;
         $data->update();
@@ -110,7 +110,7 @@ class CostController extends Controller
 
     public function destroy($id)
     {
-        $data = Cost::findOrFail($id);
+        $data = Cost::where('user_id', Auth::user()->id)->findOrFail($id);
         $data->delete();
         return redirect()->back()->with('success', 'Data Deleted Successfully');
     }

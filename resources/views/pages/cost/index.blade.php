@@ -44,6 +44,7 @@
                                         <thead>
                                             <tr>
                                                 <th style="width: 5%;">SN</th>
+                                                <th>DATE</th>
                                                 <th>CATEGORY</th>
                                                 <th>NOTE</th>
                                                 <th>AMOUNT</th>
@@ -55,6 +56,7 @@
                                             @foreach ($all_cost as $item)
                                                 <tr>
                                                     <td>{{ ++$sl }}</td>
+                                                    <td>{{ $item->date }}</td>
                                                     <td>{{ $item->category->name }}</td>
                                                     <td>{{ $item->note }}</td>
                                                     <td>{{ $item->amount }}</td>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\Revenue;
 use App\Models\RevenueCategory;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,8 +18,8 @@ class RevenueController extends Controller
      */
     public function index()
     {
-        $data['all_revenue'] = Revenue::get();
-        $data['revenue_categories'] = RevenueCategory::get();
+        $data['all_revenue'] = Revenue::where('user_id', Auth::user()->id)->get();
+        $data['revenue_categories'] = RevenueCategory::where('user_id', Auth::user()->id)->get();
         return view('pages.revenue.index', $data);
     }
 
@@ -48,7 +49,7 @@ class RevenueController extends Controller
         $data = new Revenue();
         $data->revenue_category_id = $request->revenue_category_id;
         $data->amount = $request->amount;
-        $data->date = $request->date;
+        $data->date = date("Y-d-m", strtotime($request->date));
         $data->note = $request->note;
         $data->user_id = Auth::user()->id;
         $data->save();
@@ -91,10 +92,10 @@ class RevenueController extends Controller
             'amount' => 'required',
         ]);
 
-        $data = Revenue::findOrFail($id);
+        $data = Revenue::where('user_id', Auth::user()->id)->findOrFail($id);
         $data->revenue_category_id = $request->revenue_category_id;
         $data->amount = $request->amount;
-        $data->date = $request->date;
+        $data->date = date("Y-d-m", strtotime($request->date));
         $data->note = $request->note;
         $data->user_id = Auth::user()->id;
         $data->update();
@@ -110,7 +111,7 @@ class RevenueController extends Controller
 
     public function destroy($id)
     {
-        $data = Revenue::findOrFail($id);
+        $data = Revenue::where('user_id', Auth::user()->id)->findOrFail($id);
         $data->delete();
         return redirect()->back()->with('success', 'Data Deleted Successfully');
     }
