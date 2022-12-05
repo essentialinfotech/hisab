@@ -16,9 +16,9 @@ return new class extends Migration
         Schema::create('revenues', function (Blueprint $table) {
             $table->id();
             $table->integer('revenue_category_id');
-            $table->integer('Amount');
-            $table->text('note');
-            $table->date('date');
+            $table->integer('amount');
+            $table->text('note')->nullable();
+            $table->timestamp('date');
             $table->integer('user_id');
             $table->timestamps();
         });

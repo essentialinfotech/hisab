@@ -6,8 +6,8 @@
     </ul>
     <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-            <a class="nav-link bg-blue rounded" href="{{route('stores.create')}}">
-                <i class="nav-icon fas fa-shopping-cart mr-2"></i>StoreIn
+            <a class="nav-link bg-blue rounded" href="{{route('cost.index')}}">
+                <i class="nav-icon fas fa-dollar-sign mr-2"></i>Cost
             </a>
         </li>
         <li class="nav-item">

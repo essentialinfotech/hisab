@@ -228,14 +228,14 @@
                       <li class="nav-item">
                           <a href="{{ route('cost.index') }}"
                               class="nav-link {{ Request::routeIs('cost.index') ? 'active' : '' }}">
-                              <i class="nav-icon fa fa-address-book"></i>
+                              <i class="nav-icon fa fa-dollar-sign"></i>
                               <p> Cost </p>
                           </a>
                       </li>
                       <li class="nav-item">
                           <a href="{{ route('revenue.index') }}"
                               class="nav-link {{ Request::routeIs('revenue.index') ? 'active' : '' }}">
-                              <i class="nav-icon fa fa-address-book"></i>
+                              <i class="nav-icon fa fa-dollar-sign"></i>
                               <p> Revenue </p>
                           </a>
                       </li>  

@@ -44,7 +44,6 @@
                                         <thead>
                                             <tr>
                                                 <th style="width: 5%;">SN</th>
-                                                <th>ID</th>
                                                 <th>NAME</th>
                                                 <th>DESCRIPTION</th>
                                                 <th style="width: 10%;">ACTION</th>
@@ -55,7 +54,6 @@
                                             @foreach ($cost_categories as $item)
                                                 <tr>
                                                     <td>{{ ++$sl }}</td>
-                                                    <td>{{ $item->id }}</td>
                                                     <td>{{ $item->name }}</td>
                                                     <td>{{ $item->description }}</td>
                                                     <td class="d-flex">
