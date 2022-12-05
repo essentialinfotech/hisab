@@ -39,7 +39,8 @@ class RevenueCategoryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|unique:revenue_categories,name',
+            // 'name' => 'required|unique:revenue_categories,name',
+            'name' => 'required',
         ]);
 
         $data = new RevenueCategory();
@@ -82,7 +83,8 @@ class RevenueCategoryController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => 'required|unique:revenue_categories,name,' . $id,
+            // 'name' => 'required|unique:revenue_categories,name,' . $id,
+            'name' => 'required',
         ]);
 
         $data = RevenueCategory::where('user_id', Auth::user()->id)->findOrFail($id);

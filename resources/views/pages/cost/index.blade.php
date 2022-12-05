@@ -56,7 +56,7 @@
                                             @foreach ($all_cost as $item)
                                                 <tr>
                                                     <td>{{ ++$sl }}</td>
-                                                    <td>{{ $item->date }}</td>
+                                                    <td>{{ \Carbon\Carbon::parse($item->date)->format('d/m/Y') }} ({{ Carbon\Carbon::parse($item->date)->dayName }})</td>
                                                     <td>{{ $item->category->name }}</td>
                                                     <td>{{ $item->note }}</td>
                                                     <td>{{ $item->amount }}</td>
@@ -131,7 +131,7 @@
                                                                             minlength="1" placeholder="DD/MM/YYYY"
                                                                             onfocus="this.placeholder = ''"
                                                                             onblur="this.placeholder = 'DD/MM/YYYY'"
-                                                                            value="{{ $item->date }}">
+                                                                            value="{{ \Carbon\Carbon::parse($item->date)->format('d/m/Y') }}">
                                                                         @error('date')
                                                                             <div class="alert text-danger">
                                                                                 {{ $message }}</div>

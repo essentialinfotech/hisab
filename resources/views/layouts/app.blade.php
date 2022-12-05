@@ -8,9 +8,9 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>@yield('title', @$setting->title)</title>
-    <meta property="og:title" content="{{@$setting->title}}" />
-    <meta property="og:image" content="{{asset('uploads/'.@$setting->logo)}}" />
-    <meta property="og:image:secure_url" content="{{asset('uploads/'.@$setting->logo)}}" />
+    <meta property="og:title" content="{{ @$setting->title }}" />
+    <meta property="og:image" content="{{ asset('uploads/' . @$setting->logo) }}" />
+    <meta property="og:image:secure_url" content="{{ asset('uploads/' . @$setting->logo) }}" />
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -72,6 +72,15 @@
         /* .select2-container--default .select2-selection--single .select2-selection__rendered {
             color: #9da4aa;
         } */
+
+        /* Print */
+        @media print {
+
+            #example_filter,
+            #example_length {
+                display: none;
+            }
+        }
     </style>
 
 </head>

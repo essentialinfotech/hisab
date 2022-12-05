@@ -39,7 +39,7 @@ class CostCategoryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|unique:cost_categories,name',
+            'name' => 'required',
         ]);
 
         $data = new CostCategory();
@@ -82,7 +82,7 @@ class CostCategoryController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => 'required|unique:cost_categories,name,'.$id,
+            'name' => 'required',
         ]);
 
         $data = CostCategory::where('user_id', Auth::user()->id)->findOrFail($id);

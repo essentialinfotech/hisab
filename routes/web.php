@@ -8,6 +8,7 @@ use App\Http\Controllers\Backend\CustomerController;
 use App\Http\Controllers\Backend\DashboarController;
 use App\Http\Controllers\Backend\PermissionController;
 use App\Http\Controllers\Backend\ProductController;
+use App\Http\Controllers\Backend\ReportController;
 use App\Http\Controllers\Backend\RevenueCategoryController;
 use App\Http\Controllers\Backend\RevenueController;
 use App\Http\Controllers\Backend\RoleController;
@@ -50,6 +51,11 @@ Route::resource('cost-categories', CostCategoryController::class)->middleware(['
 Route::resource('cost', CostController::class)->middleware(['auth:web', 'verified']);
 Route::resource('revenue-categories', RevenueCategoryController::class)->middleware(['auth:web', 'verified']);
 Route::resource('revenue', RevenueController::class)->middleware(['auth:web', 'verified']);
+Route::get('report', [ReportController::class,'index'])->name('report')->middleware(['auth:web', 'verified']);
+Route::get('cost-report-all', [ReportController::class, 'cost_report_all'])->name('cost-report-all')->middleware(['auth:web', 'verified']);
+Route::post('cost-report', [ReportController::class, 'cost_report'])->name('cost-report')->middleware(['auth:web', 'verified']);
+Route::get('revenue-report-all', [ReportController::class, 'revenue_report_all'])->name('revenue-report-all')->middleware(['auth:web', 'verified']);
+Route::post('revenue-report', [ReportController::class, 'revenue_report'])->name('revenue-report')->middleware(['auth:web', 'verified']);
 
 
 

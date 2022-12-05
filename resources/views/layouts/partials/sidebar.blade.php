@@ -241,7 +241,7 @@
                       </li>  
                        <li class="nav-item {{ Request::routeIs('cost-categories.index') || Request::routeIs('revenue-categories.index') ? 'menu-open' : '' }}">
                           <a href="#" class="nav-link">
-                              <i class="nav-icon far fa-money-bill-alt"></i>
+                              <i class="nav-icon fas fa-chart-pie"></i>
                               <p> Category
                                   <i class="fas fa-angle-left right"></i>
                               </p>
@@ -262,7 +262,7 @@
                           </ul>
                       </li>
                       <li class="nav-item">
-                          <a href="#uReport" class="nav-link">
+                          <a href="{{route('report')}}" class="nav-link  {{ Request::routeIs('report')|| Request::routeIs('cost-report-all')|| Request::routeIs('revenue-report-all')|| Request::routeIs('revenue-report') ? 'active' : '' }}">
                               <i class="nav-icon fa fa-flag" aria-hidden="true"></i>
                               <p> Reports</p>
                           </a>
