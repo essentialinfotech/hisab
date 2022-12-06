@@ -262,7 +262,7 @@
                           </ul>
                       </li>
                       <li class="nav-item">
-                          <a href="{{route('report')}}" class="nav-link  {{ Request::routeIs('report')|| Request::routeIs('cost-report-all')|| Request::routeIs('revenue-report-all')|| Request::routeIs('revenue-report') ? 'active' : '' }}">
+                          <a href="{{route('report')}}" class="nav-link  {{ Request::routeIs('report')|| Request::routeIs('cost-report-all')|| Request::routeIs('cost-report')|| Request::routeIs('revenue-report-all')|| Request::routeIs('revenue-report') ? 'active' : '' }}">
                               <i class="nav-icon fa fa-flag" aria-hidden="true"></i>
                               <p> Reports</p>
                           </a>

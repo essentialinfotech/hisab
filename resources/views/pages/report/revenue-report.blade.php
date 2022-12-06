@@ -58,13 +58,13 @@
                                                     <div class="form-group col-md-3 col-sm-3 col-12">
                                                         <label>Start Date *</label>
                                                         <input type="text" class="form-control datepicker"
-                                                            name="sdate" value="<?php echo date('d-m-Y'); ?>" id="sdate"
+                                                            name="sdate" placeholder="DD/MM/YYYY" id="sdate"
                                                             required="">
                                                     </div>
                                                     <div class="form-group col-md-3 col-sm-3 col-12">
                                                         <label>End Date *</label>
                                                         <input type="text" class="form-control datepicker"
-                                                            name="edate" value="<?php echo date('d-m-Y'); ?>" id="edate"
+                                                            name="edate" placeholder="DD/MM/YYYY" id="edate"
                                                             required="">
                                                     </div>
                                                     <div class="form-group col-md-3 col-sm-3 col-12">
