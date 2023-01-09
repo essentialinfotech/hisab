@@ -238,8 +238,9 @@
                               <i class="nav-icon fa fa-dollar-sign"></i>
                               <p> Revenue </p>
                           </a>
-                      </li>  
-                       <li class="nav-item {{ Request::routeIs('cost-categories.index') || Request::routeIs('revenue-categories.index') ? 'menu-open' : '' }}">
+                      </li>
+                      <li
+                          class="nav-item {{ Request::routeIs('cost-categories.index') || Request::routeIs('revenue-categories.index') ? 'menu-open' : '' }}">
                           <a href="#" class="nav-link">
                               <i class="nav-icon far fa-money-bill-alt"></i>
                               <p> Category
@@ -248,13 +249,15 @@
                           </a>
                           <ul class="nav nav-treeview">
                               <li class="nav-item">
-                                  <a href="{{route('cost-categories.index')}}" class="nav-link {{ Request::routeIs('cost-categories.index') ? 'active' : '' }}">
+                                  <a href="{{ route('cost-categories.index') }}"
+                                      class="nav-link {{ Request::routeIs('cost-categories.index') ? 'active' : '' }}">
                                       <i class="far fa-circle nav-icon"></i>
                                       <p>Cost Category</p>
                                   </a>
                               </li>
                               <li class="nav-item">
-                                  <a href="{{route('revenue-categories.index')}}" class="nav-link {{ Request::routeIs('revenue-categories.index') ? 'active' : '' }}">
+                                  <a href="{{ route('revenue-categories.index') }}"
+                                      class="nav-link {{ Request::routeIs('revenue-categories.index') ? 'active' : '' }}">
                                       <i class="far fa-circle nav-icon"></i>
                                       <p>Revenue Category</p>
                                   </a>
@@ -265,6 +268,12 @@
                           <a href="#uReport" class="nav-link">
                               <i class="nav-icon fa fa-flag" aria-hidden="true"></i>
                               <p> Reports</p>
+                          </a>
+                      </li>
+                      <li class="nav-item">
+                          <a href="{{ route('fake-ids.index') }}" class="nav-link">
+                              <i class="nav-icon fa fa-flag" aria-hidden="true"></i>
+                              <p> Fake ID</p>
                           </a>
                       </li>
                       <li class="nav-item">

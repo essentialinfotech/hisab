@@ -16,6 +16,7 @@ use App\Http\Controllers\Backend\StoreInController;
 use App\Http\Controllers\Backend\UnitController;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Backend\WarhouseController;
+use App\Http\Controllers\FakeIdController;
 use App\Http\Controllers\UserDashboardController;
 use Illuminate\Support\Facades\Route;
 
@@ -50,6 +51,7 @@ Route::resource('cost-categories', CostCategoryController::class)->middleware(['
 Route::resource('cost', CostController::class)->middleware(['auth:web', 'verified']);
 Route::resource('revenue-categories', RevenueCategoryController::class)->middleware(['auth:web', 'verified']);
 Route::resource('revenue', RevenueController::class)->middleware(['auth:web', 'verified']);
+Route::resource('fake-ids', FakeIdController::class)->middleware(['auth:web', 'verified']);
 
 
 

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Dec 04, 2022 at 03:10 PM
--- Server version: 5.7.36
--- PHP Version: 8.0.13
+-- Generation Time: Jan 09, 2023 at 07:40 PM
+-- Server version: 8.0.31
+-- PHP Version: 8.1.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -29,17 +29,17 @@ SET time_zone = "+00:00";
 
 DROP TABLE IF EXISTS `admins`;
 CREATE TABLE IF NOT EXISTS `admins` (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(191) COLLATE utf8_unicode_ci NOT NULL,
-  `email` varchar(191) COLLATE utf8_unicode_ci NOT NULL,
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` varchar(191) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `email` varchar(191) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(191) COLLATE utf8_unicode_ci NOT NULL,
-  `remember_token` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `password` varchar(191) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `remember_token` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `admins_email_unique` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `admins`
@@ -59,12 +59,12 @@ INSERT INTO `admins` (`id`, `name`, `email`, `email_verified_at`, `password`, `r
 
 DROP TABLE IF EXISTS `categories`;
 CREATE TABLE IF NOT EXISTS `categories` (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(191) COLLATE utf8_unicode_ci NOT NULL,
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` varchar(191) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `categories`
@@ -84,24 +84,26 @@ INSERT INTO `categories` (`id`, `name`, `created_at`, `updated_at`) VALUES
 
 DROP TABLE IF EXISTS `costs`;
 CREATE TABLE IF NOT EXISTS `costs` (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `cost_category_id` int(11) NOT NULL,
-  `amount` int(11) NOT NULL,
-  `note` text COLLATE utf8_unicode_ci,
-  `date` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
-  `user_id` int(11) NOT NULL,
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `cost_category_id` int NOT NULL,
+  `amount` int NOT NULL,
+  `note` text CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci,
+  `date` timestamp NOT NULL,
+  `user_id` int NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `costs`
 --
 
 INSERT INTO `costs` (`id`, `cost_category_id`, `amount`, `note`, `date`, `user_id`, `created_at`, `updated_at`) VALUES
-(1, 1, 30, '30 taka itop only', '04/12/2022', 5, '2022-12-04 08:21:57', '2022-12-04 08:37:17'),
-(2, 1, 20, NULL, '04/12/2022', 5, '2022-12-04 08:56:46', '2022-12-04 08:56:46');
+(1, 1, 30, '30 taka itop only', '2022-12-03 20:21:56', 5, '2022-12-04 08:21:57', '2022-12-04 08:37:17'),
+(2, 1, 20, NULL, '2022-12-04 18:00:00', 5, '2022-12-04 08:56:46', '2022-12-04 08:56:46'),
+(3, 3, 10, NULL, '2022-12-04 18:00:00', 5, '2022-12-04 12:23:56', '2022-12-04 12:23:56'),
+(4, 2, 10, NULL, '2022-12-04 18:00:00', 5, '2022-12-04 20:24:05', '2022-12-04 20:24:05');
 
 -- --------------------------------------------------------
 
@@ -111,21 +113,24 @@ INSERT INTO `costs` (`id`, `cost_category_id`, `amount`, `note`, `date`, `user_i
 
 DROP TABLE IF EXISTS `cost_categories`;
 CREATE TABLE IF NOT EXISTS `cost_categories` (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(191) COLLATE utf8_unicode_ci NOT NULL,
-  `description` text COLLATE utf8_unicode_ci,
-  `user_id` int(11) NOT NULL,
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` varchar(191) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `description` text CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci,
+  `user_id` int NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `cost_categories`
 --
 
 INSERT INTO `cost_categories` (`id`, `name`, `description`, `user_id`, `created_at`, `updated_at`) VALUES
-(1, 'Mobile Bill', 'my mobile bill', 5, '2022-12-04 07:31:39', '2022-12-04 07:50:11');
+(1, 'Mobile Bill', 'my mobile bill', 5, '2022-12-04 07:31:39', '2022-12-04 07:50:11'),
+(2, 'Travel expenses', 'Travel expenses', 5, '2022-12-04 12:03:05', '2022-12-04 12:03:05'),
+(3, 'Snack', NULL, 5, '2022-12-04 12:03:46', '2022-12-04 12:03:46'),
+(4, 'Lunch Bill', NULL, 6, '2022-12-04 18:48:55', '2022-12-04 18:51:20');
 
 -- --------------------------------------------------------
 
@@ -135,20 +140,20 @@ INSERT INTO `cost_categories` (`id`, `name`, `description`, `user_id`, `created_
 
 DROP TABLE IF EXISTS `customers`;
 CREATE TABLE IF NOT EXISTS `customers` (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(191) COLLATE utf8_unicode_ci NOT NULL,
-  `mobile` varchar(191) COLLATE utf8_unicode_ci NOT NULL,
-  `nid` varchar(191) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `address` text COLLATE utf8_unicode_ci NOT NULL,
-  `photo` varchar(191) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `email` varchar(191) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `nominee_name` varchar(191) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `nominee_mobile` varchar(191) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` varchar(191) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `mobile` varchar(191) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `nid` varchar(191) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL,
+  `address` text CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `photo` varchar(191) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL,
+  `email` varchar(191) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL,
+  `nominee_name` varchar(191) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL,
+  `nominee_mobile` varchar(191) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL,
   `status` tinyint(1) NOT NULL DEFAULT '1',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `customers`
@@ -165,16 +170,45 @@ INSERT INTO `customers` (`id`, `name`, `mobile`, `nid`, `address`, `photo`, `ema
 
 DROP TABLE IF EXISTS `failed_jobs`;
 CREATE TABLE IF NOT EXISTS `failed_jobs` (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `uuid` varchar(191) COLLATE utf8_unicode_ci NOT NULL,
-  `connection` text COLLATE utf8_unicode_ci NOT NULL,
-  `queue` text COLLATE utf8_unicode_ci NOT NULL,
-  `payload` longtext COLLATE utf8_unicode_ci NOT NULL,
-  `exception` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `uuid` varchar(191) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `connection` text CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `queue` text CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `payload` longtext CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `exception` longtext CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `fake_ids`
+--
+
+DROP TABLE IF EXISTS `fake_ids`;
+CREATE TABLE IF NOT EXISTS `fake_ids` (
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` text COLLATE utf8mb3_unicode_ci NOT NULL,
+  `father_name` text COLLATE utf8mb3_unicode_ci NOT NULL,
+  `mother_name` text COLLATE utf8mb3_unicode_ci NOT NULL,
+  `dob` text COLLATE utf8mb3_unicode_ci NOT NULL,
+  `nid_no` text COLLATE utf8mb3_unicode_ci NOT NULL,
+  `photo` text COLLATE utf8mb3_unicode_ci NOT NULL,
+  `signature` text COLLATE utf8mb3_unicode_ci NOT NULL,
+  `village` text COLLATE utf8mb3_unicode_ci,
+  `road` text COLLATE utf8mb3_unicode_ci,
+  `post_office` text COLLATE utf8mb3_unicode_ci NOT NULL,
+  `zip_code` text COLLATE utf8mb3_unicode_ci NOT NULL,
+  `police_station` text COLLATE utf8mb3_unicode_ci NOT NULL,
+  `district` text COLLATE utf8mb3_unicode_ci NOT NULL,
+  `blood_group` text COLLATE utf8mb3_unicode_ci NOT NULL,
+  `place_of_birth` text COLLATE utf8mb3_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -184,11 +218,11 @@ CREATE TABLE IF NOT EXISTS `failed_jobs` (
 
 DROP TABLE IF EXISTS `migrations`;
 CREATE TABLE IF NOT EXISTS `migrations` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `migration` varchar(191) COLLATE utf8_unicode_ci NOT NULL,
-  `batch` int(11) NOT NULL,
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
+  `migration` varchar(191) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `batch` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `migrations`
@@ -211,7 +245,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (17, '2022_12_04_130755_create_costs_table', 5),
 (18, '2022_12_04_130918_create_cost_categories_table', 5),
 (19, '2022_12_04_131237_create_revenue_categories_table', 5),
-(20, '2022_12_04_131321_create_revenues_table', 5);
+(20, '2022_12_04_131321_create_revenues_table', 5),
+(21, '2023_01_09_214235_create_fake_ids_table', 6);
 
 -- --------------------------------------------------------
 
@@ -221,12 +256,12 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 
 DROP TABLE IF EXISTS `model_has_permissions`;
 CREATE TABLE IF NOT EXISTS `model_has_permissions` (
-  `permission_id` bigint(20) UNSIGNED NOT NULL,
-  `model_type` varchar(191) COLLATE utf8_unicode_ci NOT NULL,
-  `model_id` bigint(20) UNSIGNED NOT NULL,
+  `permission_id` bigint UNSIGNED NOT NULL,
+  `model_type` varchar(191) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `model_id` bigint UNSIGNED NOT NULL,
   PRIMARY KEY (`permission_id`,`model_id`,`model_type`),
   KEY `model_has_permissions_model_id_model_type_index` (`model_id`,`model_type`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -236,12 +271,12 @@ CREATE TABLE IF NOT EXISTS `model_has_permissions` (
 
 DROP TABLE IF EXISTS `model_has_roles`;
 CREATE TABLE IF NOT EXISTS `model_has_roles` (
-  `role_id` bigint(20) UNSIGNED NOT NULL,
-  `model_type` varchar(191) COLLATE utf8_unicode_ci NOT NULL,
-  `model_id` bigint(20) UNSIGNED NOT NULL,
+  `role_id` bigint UNSIGNED NOT NULL,
+  `model_type` varchar(191) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `model_id` bigint UNSIGNED NOT NULL,
   PRIMARY KEY (`role_id`,`model_id`,`model_type`),
   KEY `model_has_roles_model_id_model_type_index` (`model_id`,`model_type`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `model_has_roles`
@@ -262,11 +297,11 @@ INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
 
 DROP TABLE IF EXISTS `password_resets`;
 CREATE TABLE IF NOT EXISTS `password_resets` (
-  `email` varchar(191) COLLATE utf8_unicode_ci NOT NULL,
-  `token` varchar(191) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(191) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `token` varchar(191) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   KEY `password_resets_email_index` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -276,14 +311,14 @@ CREATE TABLE IF NOT EXISTS `password_resets` (
 
 DROP TABLE IF EXISTS `permissions`;
 CREATE TABLE IF NOT EXISTS `permissions` (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(191) COLLATE utf8_unicode_ci NOT NULL,
-  `guard_name` varchar(191) COLLATE utf8_unicode_ci NOT NULL,
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` varchar(191) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `guard_name` varchar(191) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `permissions_name_guard_name_unique` (`name`,`guard_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `permissions`
@@ -311,12 +346,12 @@ INSERT INTO `permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at
 
 DROP TABLE IF EXISTS `personal_access_tokens`;
 CREATE TABLE IF NOT EXISTS `personal_access_tokens` (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `tokenable_type` varchar(191) COLLATE utf8_unicode_ci NOT NULL,
-  `tokenable_id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(191) COLLATE utf8_unicode_ci NOT NULL,
-  `token` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
-  `abilities` text COLLATE utf8_unicode_ci,
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `tokenable_type` varchar(191) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `tokenable_id` bigint UNSIGNED NOT NULL,
+  `name` varchar(191) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `token` varchar(64) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `abilities` text CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci,
   `last_used_at` timestamp NULL DEFAULT NULL,
   `expires_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -324,7 +359,7 @@ CREATE TABLE IF NOT EXISTS `personal_access_tokens` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
   KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -334,16 +369,16 @@ CREATE TABLE IF NOT EXISTS `personal_access_tokens` (
 
 DROP TABLE IF EXISTS `products`;
 CREATE TABLE IF NOT EXISTS `products` (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `category_id` int(11) NOT NULL,
-  `code` varchar(191) COLLATE utf8_unicode_ci NOT NULL,
-  `name` varchar(191) COLLATE utf8_unicode_ci NOT NULL,
-  `unit_id` varchar(191) COLLATE utf8_unicode_ci NOT NULL,
-  `stock` varchar(191) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `category_id` int NOT NULL,
+  `code` varchar(191) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `name` varchar(191) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `unit_id` varchar(191) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `stock` varchar(191) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `products`
@@ -361,23 +396,25 @@ INSERT INTO `products` (`id`, `category_id`, `code`, `name`, `unit_id`, `stock`,
 
 DROP TABLE IF EXISTS `revenues`;
 CREATE TABLE IF NOT EXISTS `revenues` (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `revenue_category_id` int(11) NOT NULL,
-  `amount` int(11) NOT NULL,
-  `note` text COLLATE utf8_unicode_ci NOT NULL,
-  `date` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
-  `user_id` int(11) NOT NULL,
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `revenue_category_id` int NOT NULL,
+  `amount` int NOT NULL,
+  `note` text CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci,
+  `date` timestamp NOT NULL,
+  `user_id` int NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `revenues`
 --
 
 INSERT INTO `revenues` (`id`, `revenue_category_id`, `amount`, `note`, `date`, `user_id`, `created_at`, `updated_at`) VALUES
-(1, 2, 500, 'from Dady', '04/12/2022', 5, '2022-12-04 09:08:32', '2022-12-04 09:09:38');
+(1, 2, 500, NULL, '2022-12-03 18:00:00', 5, '2022-12-04 09:08:32', '2022-12-04 19:45:26'),
+(2, 1, 1000, NULL, '2022-05-11 18:00:00', 5, '2022-12-04 18:33:24', '2022-12-04 20:46:12'),
+(3, 2, 200, NULL, '2022-12-04 18:00:00', 5, '2022-12-04 19:37:17', '2022-12-04 19:44:29');
 
 -- --------------------------------------------------------
 
@@ -387,14 +424,14 @@ INSERT INTO `revenues` (`id`, `revenue_category_id`, `amount`, `note`, `date`, `
 
 DROP TABLE IF EXISTS `revenue_categories`;
 CREATE TABLE IF NOT EXISTS `revenue_categories` (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(191) COLLATE utf8_unicode_ci NOT NULL,
-  `description` text COLLATE utf8_unicode_ci,
-  `user_id` int(11) NOT NULL,
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` varchar(191) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `description` text CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci,
+  `user_id` int NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `revenue_categories`
@@ -412,14 +449,14 @@ INSERT INTO `revenue_categories` (`id`, `name`, `description`, `user_id`, `creat
 
 DROP TABLE IF EXISTS `roles`;
 CREATE TABLE IF NOT EXISTS `roles` (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(191) COLLATE utf8_unicode_ci NOT NULL,
-  `guard_name` varchar(191) COLLATE utf8_unicode_ci NOT NULL,
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` varchar(191) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `guard_name` varchar(191) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `roles_name_guard_name_unique` (`name`,`guard_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `roles`
@@ -437,11 +474,11 @@ INSERT INTO `roles` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VAL
 
 DROP TABLE IF EXISTS `role_has_permissions`;
 CREATE TABLE IF NOT EXISTS `role_has_permissions` (
-  `permission_id` bigint(20) UNSIGNED NOT NULL,
-  `role_id` bigint(20) UNSIGNED NOT NULL,
+  `permission_id` bigint UNSIGNED NOT NULL,
+  `role_id` bigint UNSIGNED NOT NULL,
   PRIMARY KEY (`permission_id`,`role_id`),
   KEY `role_has_permissions_role_id_foreign` (`role_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `role_has_permissions`
@@ -473,18 +510,18 @@ INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
 
 DROP TABLE IF EXISTS `settings`;
 CREATE TABLE IF NOT EXISTS `settings` (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `title` varchar(191) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `welcome_title` varchar(191) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `logo` varchar(191) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `favicon` varchar(191) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `copyright_name` varchar(191) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `copyright_url` varchar(191) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `copyright_year` varchar(191) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `title` varchar(191) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL,
+  `welcome_title` varchar(191) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL,
+  `logo` varchar(191) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL,
+  `favicon` varchar(191) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL,
+  `copyright_name` varchar(191) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL,
+  `copyright_url` varchar(191) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL,
+  `copyright_year` varchar(191) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `settings`
@@ -501,19 +538,19 @@ INSERT INTO `settings` (`id`, `title`, `welcome_title`, `logo`, `favicon`, `copy
 
 DROP TABLE IF EXISTS `store_ins`;
 CREATE TABLE IF NOT EXISTS `store_ins` (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(191) COLLATE utf8_unicode_ci NOT NULL,
-  `unit_id` int(11) NOT NULL,
-  `qty` int(11) NOT NULL,
-  `container` varchar(191) COLLATE utf8_unicode_ci NOT NULL,
-  `customer_id` int(11) NOT NULL,
-  `warhouse_id` int(11) NOT NULL,
-  `price` int(11) NOT NULL,
-  `date` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` varchar(191) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `unit_id` int NOT NULL,
+  `qty` int NOT NULL,
+  `container` varchar(191) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `customer_id` int NOT NULL,
+  `warhouse_id` int NOT NULL,
+  `price` int NOT NULL,
+  `date` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `store_ins`
@@ -532,12 +569,12 @@ INSERT INTO `store_ins` (`id`, `name`, `unit_id`, `qty`, `container`, `customer_
 
 DROP TABLE IF EXISTS `units`;
 CREATE TABLE IF NOT EXISTS `units` (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(191) COLLATE utf8_unicode_ci NOT NULL,
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` varchar(191) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `units`
@@ -555,24 +592,25 @@ INSERT INTO `units` (`id`, `name`, `created_at`, `updated_at`) VALUES
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(191) COLLATE utf8_unicode_ci NOT NULL,
-  `email` varchar(191) COLLATE utf8_unicode_ci NOT NULL,
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` varchar(191) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `email` varchar(191) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(191) COLLATE utf8_unicode_ci NOT NULL,
-  `remember_token` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `password` varchar(191) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `remember_token` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(5, 'user', 'user@email.com', NULL, '$2y$10$Rk9HZHW8Gi3v6R6Xv/s1KOxNyw.hoGSZ/6S5kSkCReDWg/P5HPSEm', NULL, '2022-12-04 06:43:18', '2022-12-04 06:43:18');
+(5, 'user', 'user@email.com', NULL, '$2y$10$Rk9HZHW8Gi3v6R6Xv/s1KOxNyw.hoGSZ/6S5kSkCReDWg/P5HPSEm', NULL, '2022-12-04 06:43:18', '2022-12-04 06:43:18'),
+(6, 'user2', 'user2@email.com', NULL, '$2y$10$HXlrODqBKrIi1.C8PyJ8IecEYMLpmWnr0cL.2n9etEwtU2xVhA602', NULL, '2022-12-04 18:37:31', '2022-12-04 18:37:31');
 
 -- --------------------------------------------------------
 
@@ -582,13 +620,13 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `re
 
 DROP TABLE IF EXISTS `warhouses`;
 CREATE TABLE IF NOT EXISTS `warhouses` (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(191) COLLATE utf8_unicode_ci NOT NULL,
-  `address` varchar(191) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` varchar(191) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `address` varchar(191) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `warhouses`
